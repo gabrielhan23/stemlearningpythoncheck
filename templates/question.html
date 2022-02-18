@@ -1,0 +1,47 @@
+{% extends "template.html" %}
+
+{% block info %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/question.css')}}">
+{% endblock info %}
+
+{% block bodyContent %}
+  <div id="content">
+    <h1>{{ question[0] }}</h1>
+    <h5>{{ question[1] }}</h5>
+    {% if question[2][0][0] != "" %}
+    <h2>Example Input:</h2>
+    <h5>{{ question[2][0][0] }}</h5>
+    {% endif %}
+    <h2>Example Output:</h2>
+    <h5>{{ question[2][0][1] }}</h5>
+    <div class="space"></div>
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group mt-5">
+                <legend class="border-bottom mb-4 join">Submit Code</legend>
+                <div class="form-group">
+                    {{ form.code.label(class="form-control-label") }}
+                    {% if form.code.errors %}
+                        {{ form.code(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.code.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.code(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+  </div>
+{% endblock bodyContent %}
+
+{% block scripts %}
+<script src="{{url_for('static', filename='js/question.js')}}"></script>
+{% endblock scripts %}

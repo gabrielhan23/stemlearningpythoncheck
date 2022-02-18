@@ -1,0 +1,37 @@
+{% extends "template.html" %}
+
+{% block info %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/admin.css')}}">
+{% endblock info %}
+
+{% block bodyContent %}
+  <div id="content">
+    <h1>Admin Page</h1>
+    <table>
+      <tr>
+        <th>Student</th>
+        {% for key, task in tasks.items() %}
+          <th>{{task[0]}}</th>
+        {% endfor %}
+      </tr>
+      {% for user in users %}
+        <tr>
+          <td><a href='user/{{user.username}}'>{{user.username}}</a></td>
+          {% for key,task in tasks.items() %}
+            {% if user.passed and task[0] in user.passed %}
+              <td>Y</td>
+            {% else %}
+              <td></td>
+            {% endif %}
+          {% endfor %}
+        </tr>
+      {% endfor %}
+      <tr>
+      </tr>
+    </table>
+  </div>
+{% endblock bodyContent %}
+
+{% block scripts %}
+<script src="{{url_for('static', filename='js/home.js')}}"></script>
+{% endblock scripts %}

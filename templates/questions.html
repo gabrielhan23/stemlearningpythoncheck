@@ -1,0 +1,23 @@
+{% extends "template.html" %}
+
+{% block info %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/questions.css')}}">
+{% endblock info %}
+
+{% block bodyContent %}
+  <div id="content">
+    <h1>Choose a question</h1>
+    <div>
+      {% for key,question in questions.items() %}
+        <label class="container"><a href="/questions/{{key}}">{{question[0]}}</a>
+          <input type="checkbox" {% if passed and question[0] in passed %} checked="checked"{% endif %}>
+          <span class="checkmark"></span>
+        </label>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock bodyContent %}
+
+{% block scripts %}
+<script src="{{url_for('static', filename='js/questions.js')}}"></script>
+{% endblock scripts %}

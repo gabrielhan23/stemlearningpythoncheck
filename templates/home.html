@@ -1,0 +1,16 @@
+{% extends "template.html" %}
+
+{% block info %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}">
+{% endblock info %}
+
+{% block bodyContent %}
+  <div id="content">
+    <h1>Welcome to Gabriel's Code Checker!</h1>
+    <h3>Please sign up if you are new, or login to your account</h3>
+  </div>
+{% endblock bodyContent %}
+
+{% block scripts %}
+<script src="{{url_for('static', filename='js/home.js')}}"></script>
+{% endblock scripts %}

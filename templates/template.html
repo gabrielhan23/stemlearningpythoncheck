@@ -1,0 +1,94 @@
+<!DOCTYPE HTML5>
+<html>
+  <head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.js">
+	</script>
+
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- Bootstrap JS -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+  
+  <!-- Page CSS -->
+  <link rel="stylesheet" href="{{url_for('static', filename='css/template.css')}}">
+
+  <link href="https://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+
+	{% if title %}
+      <title>Code Checker - {{ title }}</title>
+  {% else %}
+      <title>Code Checker</title>
+  {% endif %}
+  </head>
+
+  <body>
+    <div class="body-container">
+    {% block info %}
+    {% endblock %}
+    <div class="nav nav-invisible color">
+      <a href="/" class="nav-link">
+        <div class="nav-title">Code Checker</div>
+      </a>
+      {% block title %}
+      {% endblock %}
+      <div class="nav-right">
+        <a href="/questions" class="nav-link">QUESTIONS</a>
+        <a href="/account" class="nav-link">ACCOUNT</a>
+        <a href="/login" class="nav-link">LOGIN</a>
+        <a href="/signup" class="nav-link">SIGNUP</a>
+      </div>
+    </div>
+    <div>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}" style="margin: 2rem 3rem 0 3rem">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+      {% endwith %}
+    </div>
+    <div class="body">
+      {% block bodyContent %}{% endblock %}
+    </div>
+    <footer class="footer-distributed">
+			<div class="footer-right">
+				<a href="#"><i class="fa fa-facebook"></i></a>
+				<a href="#"><i class="fa fa-twitter"></i></a>
+				<a href="#"><i class="fa fa-linkedin"></i></a>
+				<a href="#"><i class="fa fa-github"></i></a>
+			</div>
+			<div class="footer-left">
+				<p class="footer-links">
+					<a href="#" class="text-white">Home</a>
+					·
+					<a href="#" class="text-white">Email</a>
+					·
+					<a href="#" class="text-white">Phone</a>
+					·
+					<a href="#" class="text-white">Facebook</a>
+					·
+					<a href="#" class="text-white">Instagram</a>
+					·
+					<a href="#" class="text-white">Contact</a>
+				</p>
+				<p>Code Checker © 2021 Gabriel Han. All Rights Reserved.</p>
+			</div>
+
+		</footer>
+    </div>
+    {% block scripts %}
+      
+    {% endblock %}
+  </body>
+</html>

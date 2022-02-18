@@ -1,0 +1,61 @@
+{% extends "template.html" %}
+
+{% block info %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/user.css')}}">
+{% endblock info %}
+
+{% block bodyContent %}
+<div class="space"></div>
+<h3 class="content-section ml-5 mr-5 mt-5">User: {{user.username}}</h3>
+
+<table class="content-section ml-5 mr-5 mt-5">
+  <tr>
+    <th>Question</th>
+    <th>Status</th>
+    <th>Code</th>
+  </tr>
+  {% for key,question in questions.items() %}
+    <tr>
+      <td>{{question[0]}}</td>
+      {% if user.passed and question[0] in user.passed %}
+        <td>Y</td>
+      {% else %}
+        <td></td>
+      {% endif %}
+      <td><pre>{{code[key+".py"]}}</pre></td>
+    </tr>
+  {% endfor %}
+  <tr>
+  </tr>
+</table>
+<form method="POST" action="https://stemlearningpythoncheck.1234567890hihi.repl.co/deleteuser">
+  <div class="form-group ml-5 mr-5 mt-3">
+    <input id="username" name="username" class="d-none" value="{{user.username}}">
+    <input type="submit" class="btn btn-outline-danger" value="Delete User">
+  </div>
+</form>
+    <div class="content-section ml-5 mr-5 mt-5">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4 join">Change Student Password</legend>
+                <div class="form-group">
+                    {{ form.password.label(class="form-control-label") }}
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+{% endblock bodyContent %}
